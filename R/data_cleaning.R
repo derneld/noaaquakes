@@ -31,7 +31,7 @@ eq_location_clean <- function(x) {
 #' @examples
 #' clean_usa_names(c("Mexico", "California", "France", "Texas"))
 clean_usa_names <- function(country_vec) {
-  is_state <- country_vec %in% state.name
+  is_state <- country_vec %in% datasets::state.name
   country_vec[is_state] <- "USA"
   return(country_vec)
 }

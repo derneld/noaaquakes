@@ -31,6 +31,12 @@ eq_map <- function(data, annot_col = "DATE") {
 #' eq_create_label(data)
 #' }
 eq_create_label <- function(data) {
+  # Validate columns exist
+  required_cols <- c("LOCATION_NAME", "EQ_PRIMARY", "DEATHS")
+  if (!all(required_cols %in% names(data))) {
+    stop("Input data must contain: LOCATION_NAME, EQ_PRIMARY, and DEATHS")
+  }
+
   # Helper to build a single row of text if data exists
   build_line <- function(label, value) {
     ifelse(!is.na(value), paste0("<b>", label, ":</b> ", value, "<br/>"), "")
@@ -46,10 +52,3 @@ eq_create_label <- function(data) {
     paste0(loc, mag, deaths)
   })
 }
-
-# Assuming file_path is defined
-eq_read_data(file_path) %>%
-  eq_clean_data() %>%
-  dplyr::filter(COUNTRY == "Mexico" & lubridate::year(DATE) >= 2000) %>%
-  dplyr::mutate(popup_text = eq_create_label(.)) %>%
-  eq_map(annot_col = "popup_text")
