@@ -13,10 +13,6 @@ eq_read_data <- function(file_path) {
 #' Clean Location Name column
 #' @param x A character vector of location names
 #' @return A cleaned character vector in title case without country prefixes
-#' @export
-#' @examples
-#' eq_location_clean("JORDAN: BAB-A-DARAA")
-#' eq_location_clean(c("USA: CALIFORNIA", "MEXICO: MEXICO CITY"))
 eq_location_clean <- function(x) {
   x_clean <- stringr::str_remove(x, "^.*:\\s*")
   x_clean <- trimws(x_clean)
@@ -27,9 +23,6 @@ eq_location_clean <- function(x) {
 #' Standardize USA State Names
 #' @param country_vec A character vector of country or state names
 #' @return A character vector where state names are replaced with "USA"
-#' @export
-#' @examples
-#' clean_usa_names(c("Mexico", "California", "France", "Texas"))
 clean_usa_names <- function(country_vec) {
   is_state <- country_vec %in% datasets::state.name
   country_vec[is_state] <- "USA"

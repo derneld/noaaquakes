@@ -25,8 +25,11 @@ geom_timeline <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @rdname geom_timeline
 #' @format NULL
 #' @usage NULL
+#' @importFrom scales alpha
+#' @importFrom grid polylineGrob unit gpar pointsGrob gTree gList
+#' @importFrom ggplot2 ggproto Geom aes draw_key_point
 #' @export
-GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
+GeomTimeline <- ggplot2::ggproto("GeomTimeline", Geom,
                                  required_aes = c("x"),
                                  default_aes = ggplot2::aes(y = 0, shape = 19, colour = "grey", size = 1.5, alpha = 0.5, stroke = 0.5),
                                  draw_key = ggplot2::draw_key_point,

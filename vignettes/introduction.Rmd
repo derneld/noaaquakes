@@ -1,8 +1,10 @@
 ---
-title: "introduction"
+title: "introduction to noaaquakes"
+author: "Donald Davis"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{introduction}
+  %\VignetteIndexEntry{Introduction to noaaquakes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,4 +18,72 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(noaaquakes)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+```
+
+The noaaquakes package is designed to help researchers and data scientists process and visualize the NOAA Significant Earthquake Database. It handles the cleaning of raw data and provides specialized tools for temporal and spatial visualization.
+
+## Data Processing
+
+First, we load the raw data and clean it. In this example, we assume you have the NOAA dataset saved locally.
+
+```{r exreadclean}
+# Locate the data within the package installation
+filename <- system.file("extdata", "earthquakes.tsv", package = "noaaquakes")
+
+# Read and clean the data
+# Note: eq_clean_data handles the date conversion and location cleaning
+data <- readr::read_tsv(filename) %>% 
+  eq_clean_data()
+
+# Preview the cleaned data
+head(data %>% select(DATE, COUNTRY, LOCATION_NAME, EQ_PRIMARY))
+```
+    
+### Internal Helpers
+
+Note that eq_location_clean() and clean_usa_names() are internal helper functions used by the cleaning pipeline and are not exported for direct user use.
+
+## Visualizing Timelines with geom_timeline
+
+The geom_timeline() function allows you to plot earthquakes along a horizontal time axis. You can compare different countries by mapping them to the y aesthetic.
+
+```{r ex1}
+# Example: Visualizing major earthquakes in China and USA since 2010
+data %>%
+  filter(COUNTRY %in% c("USA", "China"), Year > 2010) %>%
+  ggplot(aes(x = DATE, 
+             y = COUNTRY, 
+             size = EQ_PRIMARY, 
+             color = DEATHS)) +
+  geom_timeline() +
+  theme_minimal()
+```
+
+### Adding Labels
+
+To identify specific events, use geom_timeline_label(). This adds a vertical line and a 45-degree rotated label for the top n_max earthquakes by magnitude.
+
+```{r ex2}
+data %>%
+  filter(COUNTRY == "USA", Year > 2005) %>%
+  ggplot(aes(x = DATE, y = COUNTRY, size = EQ_PRIMARY, color = DEATHS)) +
+  geom_timeline() +
+  geom_timeline_label(aes(label = LOCATION_NAME, magnitude = EQ_PRIMARY), n_max = 5)
+```
+
+## Interactive Mapping
+
+For spatial analysis, noaaquakes provides a wrapper around the leaflet package.
+
+1. eq_map(): Draws the map with circle markers where the radius corresponds to the earthquake's magnitude.
+2. eq_create_label(): Generates high-quality HTML labels showing the Location, Magnitude, and Total Deaths for map pop-ups.
+
+```{r ex3}
+data %>%
+  filter(COUNTRY == "Mexico", Year > 2015) %>%
+  mutate(popup_text = eq_create_label(.)) %>%
+  eq_map(annot_col = "popup_text")
 ```

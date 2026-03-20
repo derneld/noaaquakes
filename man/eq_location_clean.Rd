@@ -15,7 +15,3 @@ A cleaned character vector in title case without country prefixes
 \description{
 Clean Location Name column
 }
-\examples{
-eq_location_clean("JORDAN: BAB-A-DARAA")
-eq_location_clean(c("USA: CALIFORNIA", "MEXICO: MEXICO CITY"))
-}

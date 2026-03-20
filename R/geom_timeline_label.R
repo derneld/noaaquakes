@@ -16,7 +16,7 @@ geom_timeline_label <- function(mapping = NULL, data = NULL, stat = "TimelineLab
   if (is.null(mapping)) {
     mapping <- ggplot2::aes(magnitude = EQ_PRIMARY)
   } else if (is.null(mapping$magnitude)) {
-    mapping$magnitude <- ggplot2::aes(m = Mag)$m
+    mapping$magnitude <- ggplot2::aes(m = EQ_PRIMARY)$m
   }
 
   ggplot2::layer(
@@ -46,6 +46,8 @@ StatTimelineLabel <- ggplot2::ggproto("StatTimelineLabel", ggplot2::Stat,
 #' @rdname geom_timeline_label
 #' @format NULL
 #' @usage NULL
+#' @importFrom ggplot2 ggproto Geom aes
+#' @importFrom grid segmentsGrob unit gpar textGrob gTree gList
 #' @export
 GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
                                       required_aes = c("x", "label"),

@@ -15,6 +15,3 @@ A character vector where state names are replaced with "USA"
 \description{
 Standardize USA State Names
 }
-\examples{
-clean_usa_names(c("Mexico", "California", "France", "Texas"))
-}
