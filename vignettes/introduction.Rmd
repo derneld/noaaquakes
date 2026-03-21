@@ -81,7 +81,7 @@ For spatial analysis, noaaquakes provides a wrapper around the leaflet package.
 1. eq_map(): Draws the map with circle markers where the radius corresponds to the earthquake's magnitude.
 2. eq_create_label(): Generates high-quality HTML labels showing the Location, Magnitude, and Total Deaths for map pop-ups.
 
-```{r ex3}
+```{r ex3, screenshot.force = TRUE}
 data %>%
   filter(COUNTRY == "Mexico", Year > 2015) %>%
   mutate(popup_text = eq_create_label(.)) %>%

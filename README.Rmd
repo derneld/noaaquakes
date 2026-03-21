@@ -82,7 +82,7 @@ clean_data %>%
 
 The eq_map() function leverages leaflet to create interactive visualizations. You can generate custom HTML labels using eq_create_label() to show detailed information in pop-ups.
 
-```{r example4}
+```{r example4, screenshot.force = TRUE}
 clean_data %>%
   filter(COUNTRY == "Mexico" & Year > 2010) %>%
   mutate(popup_text = eq_create_label(.)) %>%
