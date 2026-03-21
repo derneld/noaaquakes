@@ -10,6 +10,7 @@ interactive mapping.
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/derneld/noaaquakes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/derneld/noaaquakes/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Installation

@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 The noaaquakes package provides a suite of tools for reading, cleaning, and visualizing the NOAA Significant Earthquake Database. It includes specialized ggplot2 geometries for timelines and leaflet wrappers for interactive mapping.
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/derneld/noaaquakes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/derneld/noaaquakes/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 
