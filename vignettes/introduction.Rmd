@@ -1,5 +1,5 @@
 ---
-title: "introduction to noaaquakes"
+title: "Introduction to noaaquakes"
 author: "Donald Davis"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
