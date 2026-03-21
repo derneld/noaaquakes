@@ -118,3 +118,5 @@ data %>%
   mutate(popup_text = eq_create_label(.)) %>%
   eq_map(annot_col = "popup_text")
 ```
+
+![](introduction_files/figure-html/ex3-1.png)

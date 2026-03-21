@@ -99,6 +99,8 @@ clean_data %>%
   eq_map(annot_col = "popup_text")
 ```
 
+![](reference/figures/README-example4-1.png)
+
 # Package index
 
 ## All functions

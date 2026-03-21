@@ -98,3 +98,5 @@ clean_data %>%
   mutate(popup_text = eq_create_label(.)) %>%
   eq_map(annot_col = "popup_text")
 ```
+
+![](reference/figures/README-example4-1.png)
